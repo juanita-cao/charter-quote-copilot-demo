@@ -1,0 +1,225 @@
+:root {
+  --primary: #125993;
+  --secondary: #1f9aa6;
+  --header-h: 60px;
+  --sidebar-w: 220px;
+  --sidebar-w-collapsed: 48px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "HarmonyOS Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  color: #1f2937;
+  background: #f5f7fa;
+}
+.full-page-center { min-height: 100vh; display: grid; place-items: center; }
+.mock-banner { flex: 0 0 auto; background: #d97706; color: #fff; text-align: center; font-weight: 700; padding: 4px 8px; letter-spacing: 0.04em; grid-column: 1 / -1; }
+
+/* Auth shell */
+.auth-shell { min-height: 100vh; display: grid; grid-template-columns: 38.4% 1fr; grid-template-rows: auto 1fr; background: #fff; }
+.auth-left { grid-row: 2; background: linear-gradient(180deg, var(--primary), var(--secondary)); color: #fff; display: flex; flex-direction: column; padding: 28px; }
+.auth-brand { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; }
+.auth-illustration { width: 100%; margin: auto 0; object-fit: contain; }
+.auth-right { grid-row: 2; display: flex; flex-direction: column; min-height: 0; }
+.auth-topbar { display: flex; justify-content: flex-end; padding: 12px 20px; }
+.auth-form-wrap { flex: 1; display: grid; place-items: center; padding: 16px; }
+.auth-form { width: 100%; max-width: 380px; }
+.auth-form h1 { margin: 12px 0 4px; font-size: 26px; color: var(--primary); }
+.auth-subtitle { margin: 0 0 20px; color: #6b7280; font-size: 15px; }
+.auth-switch { margin-top: 16px; color: #6b7280; }
+.auth-form a, .auth-switch a { color: var(--primary); font-weight: 600; text-decoration: none; }
+.auth-form a:hover { text-decoration: underline; }
+@media (max-width: 900px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-left { display: none; }
+}
+
+/* App shell */
+.app-shell { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.app-header { flex: 0 0 var(--header-h); height: var(--header-h); background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.app-header-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 18px; font-weight: 700; text-decoration: none; }
+.app-header-actions { display: flex; align-items: center; gap: 8px; }
+.app-header-icon { color: #fff; font-size: 18px; padding: 0 8px; }
+.app-body { flex: 1; display: flex; min-height: 0; }
+.app-sidebar { width: var(--sidebar-w); background: #fff; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; justify-content: space-between; padding: 12px 0; flex: 0 0 auto; transition: width 0.2s; }
+.app-sidebar.collapsed { width: var(--sidebar-w-collapsed); }
+.app-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.app-nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #374151; text-decoration: none; white-space: nowrap; overflow: hidden; }
+.app-nav-item:hover { background: #f3f4f6; }
+.app-nav-item.active { background: #e6f0f8; color: var(--primary); font-weight: 600; border-right: 3px solid var(--primary); }
+.app-sidebar.collapsed .app-nav-item { justify-content: center; padding: 12px 0; }
+.app-sidebar-toggle { align-self: flex-end; margin: 0 8px; width: 24px; height: 24px; padding: 0; }
+.app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-y: auto; }
+.app-content { flex: 1; padding: 24px; }
+.app-footer { text-align: center; color: #9ca3af; font-size: 12px; padding: 16px; }
+
+/* Workspace */
+.field-row { display: grid; gap: 0 16px; }
+.field-row .ant-form-item { margin-bottom: 16px; }
+@media (max-width: 700px) { .field-row { grid-template-columns: 1fr !important; } }
+.required-mark { color: #dc2626; }
+.required-note { color: #6b7280; font-size: 12px; margin: 8px 0 0; }
+.bunker-caption.warn { color: #b45309; }
+.bunker-caption.ok { color: #15803d; }
+.bunker-caption.offer { color: #b45309; }
+.bunker-caption.offer a { cursor: pointer; text-decoration: underline; }
+.panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; }
+.panel-empty { color: #6b7280; margin: 0; }
+.verdict.stale { opacity: 0.5; }
+.verdict-reason { color: #6b7280; font-size: 13px; margin: 12px 0 8px; }
+
+/* Client layout (old Streamlit look): section header with a blue rule, cards with a left accent */
+.section-header { display: flex; align-items: baseline; gap: 8px; border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin: 8px 0 12px; }
+.section-help { display: inline-grid; place-items: center; width: 18px; height: 18px; border: 1px solid #9ca3af; border-radius: 50%; color: #6b7280; font-size: 11px; cursor: help; }
+.stacked-main { font-weight: 600; }
+.label-unit { white-space: nowrap; }
+.section-header .stacked-main { font-size: 18px; font-weight: 700; }
+.metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.metric-card { background: #fff; border: 1px solid #e5e7eb; border-left: 4px solid var(--primary); border-radius: 4px; padding: 10px 12px; min-height: 92px; display: flex; flex-direction: column; justify-content: space-between; }
+.metric-card .stacked-main { font-size: 13px; color: #4b5563; }
+.metric-value { font-size: 22px; font-weight: 700; margin-top: 6px; }
+.metric-card.go { border-left-color: #16a34a; }
+.metric-card.nogo { border-left-color: #ef4444; }
+.decision-pill { display: inline-block; font-size: 15px; font-weight: 700; padding: 2px 12px; border-radius: 999px; }
+.decision-pill.go { color: #15803d; background: #dcfce7; }
+.decision-pill.nogo { color: #dc2626; background: #fee2e2; }
+.reset-cell { border: none; background: transparent; justify-content: center; align-items: flex-start; }
+.sandbox-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #e5e7eb; }
+.sandbox-field { display: flex; flex-direction: column; gap: 6px; }
+.risk-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.risk-table th, .risk-table td { text-align: left; padding: 8px 6px; vertical-align: middle; }
+.risk-table thead th { border-bottom: 1px solid #e5e7eb; font-weight: 600; }
+.risk-table tbody th { font-weight: 400; }
+.risk-table td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.risk-table .ant-input-number { width: 110px; }
+@media (max-width: 1100px) { .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Field labels stay on one line so a required star never pushes its input out of line with its neighbours */
+.field-row .ant-form-item-label { padding-bottom: 4px; }
+.field-row .ant-form-item-label > label { white-space: nowrap; font-size: 13px; height: auto; }
+.required-mark { display: inline; }
+
+.details-collapse { margin-top: 4px; }
+.details-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; margin: 0; }
+.details-list > div { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; border-bottom: 1px dashed #e5e7eb; padding-bottom: 6px; }
+.details-list dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.metric-card .card-input { width: 100%; font-size: 20px; font-weight: 700; }
+.metric-card .card-input .ant-input-number-input { font-weight: 700; font-size: 20px; padding-inline: 0; }
+.metric-card .card-input.ant-input-number { border: none; border-bottom: 1px solid #d1d5db; border-radius: 0; box-shadow: none; background: transparent; }
+
+/* Workspace: on a wide content area the inputs and the results scroll independently, each inside its own region;
+   below ~1100px of CONTENT width (the sidebar's width counts) they stack and the page scrolls once, naturally.
+   .app-main is the query container and always the page scroller; a container query can only restyle its
+   descendants, so both modes are switched on .app-content. */
+.app-main { container-type: inline-size; container-name: main; }
+.workspace > * { min-width: 0; }
+.workspace { display: grid; grid-template-columns: minmax(360px, 5fr) minmax(420px, 6fr); gap: 24px; align-items: start; }
+.app-content:has(> .workspace) { flex: 1 1 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; padding-bottom: 0; }
+.app-content:has(> .workspace) > .workspace { flex: 1; min-height: 0; align-items: stretch; }
+.workspace-inputs, .workspace-results { min-height: 0; overflow-y: auto; padding: 2px 8px 24px 2px; }
+.workspace-inputs:focus-visible, .workspace-results:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+@container main (max-width: 1100px) {
+  .app-content:has(> .workspace) { flex: 0 0 auto; overflow: visible; display: block; padding-bottom: 24px; }
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+  .workspace-inputs, .workspace-results { overflow: visible; padding-right: 2px; }
+}
+
+.app-main:focus { outline: none; }
+
+/* The up / down arrows of every number field stay visible. Ant Design keeps them at width 0 and opacity 0 until hover, so
+   both are forced, and the text gets room so a long number never runs under the arrows. */
+.ant-input-number .ant-input-number-handler-wrap { opacity: 1 !important; width: 22px !important; }
+.ant-input-number .ant-input-number-input { padding-inline-end: 26px; }
+
+/* Action bar: Run + precision (Save Draft / Save Quote join in round 2c). Sticky at the bottom of the content area. */
+.action-bar { flex: 0 0 auto; position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 24px; margin: 0 -24px; background: #fff; border-top: 1px solid #e5e7eb; }
+.action-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.action-label { color: #4b5563; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+.action-help { color: #9ca3af; cursor: help; }
+.draft-banner { flex: 0 0 auto; margin-bottom: 12px; }
+.draft-banner .ant-alert-action { display: flex; gap: 8px; }
+.previous-search { margin-bottom: 12px; background: #fff; }
+.previous-body { display: flex; flex-direction: column; gap: 10px; }
+.previous-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.previous-empty { color: #6b7280; }
+.previous-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; max-height: 240px; overflow-y: auto; }
+.previous-row { width: 100%; display: flex; align-items: center; gap: 8px; text-align: left; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 10px; cursor: pointer; font: inherit; }
+.previous-row:hover:not(:disabled) { border-color: var(--primary); background: #f5f9ff; }
+.previous-row:disabled { color: #9ca3af; cursor: not-allowed; }
+.previous-main { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.previous-date { color: #6b7280; font-size: 12px; }
+
+.history-page { display: flex; flex-direction: column; gap: 12px; }
+.history-page h2 { margin: 0; }
+.history-filters { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)) auto auto; gap: 8px; }
+.history-months { display: flex; align-items: center; gap: 8px; }
+.history-pills { display: flex; gap: 8px; }
+.history-toolbar { display: flex; align-items: center; gap: 16px; }
+.history-toolbar-spacer { flex: 1; }
+.history-empty { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 24px; }
+.history-empty-hint { color: #6b7280; }
+@media (max-width: 900px) { .history-filters { grid-template-columns: 1fr 1fr; } }
+
+.help-page { display: flex; flex-direction: column; gap: 16px; }
+.help-page h2 { margin: 0; }
+.help-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; }
+.help-card h3 { margin: 0 0 12px; font-size: 16px; }
+.help-search { display: flex; gap: 12px; }
+.help-search .ant-input-affix-wrapper, .help-search .ant-input { flex: 1; }
+.help-answer p { margin: 0 0 8px; color: #374151; }
+.help-answer p:last-child { margin-bottom: 0; }
+.help-empty { padding: 16px 0; color: #6b7280; display: flex; align-items: center; gap: 12px; }
+
+.history-toolbar { flex-wrap: wrap; }
+.app-account-label { display: inline-block; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+
+/* Phones: nothing may be wider than the screen (a wider page makes phone browsers shrink the whole page to fit, which
+   looks like "the desktop site"). Header: logo only and a truncated account name; content padding halves; the action bar
+   becomes two rows (New quote + precision + Run, then the two Save buttons); History filters go one per row. */
+@media (max-width: 700px) {
+  .app-header { padding: 0 10px; }
+  .app-header-brand span { display: none; }
+  .app-header-actions { gap: 0; min-width: 0; }
+  .app-header-actions .ant-btn-text { padding: 4px 6px; }
+  .app-account-label { max-width: 90px; }
+  .app-content { padding: 12px; }
+  .app-content:has(> .workspace) { padding-bottom: 0; }
+  .app-footer { padding: 10px; }
+  .action-bar { flex-direction: column; align-items: stretch; gap: 8px; padding: 8px 12px; margin: 0 -12px; }
+  .action-group { width: 100%; flex-wrap: nowrap; gap: 8px; }
+  .action-group .action-label { display: none !important; }
+  .action-group .ant-select { flex: 1 1 0; min-width: 0 !important; }
+  .action-group .ant-btn { padding-inline: 10px; }
+  .action-group > .ant-btn:not(.ant-btn-primary) { flex: 1 1 0; }
+  .action-group > span:not(.action-label) { flex: 1 1 0; display: block; }
+  .action-group > span:not(.action-label) .ant-btn { width: 100%; }
+  .draft-banner .ant-alert-action { flex-wrap: wrap; }
+  .history-filters { grid-template-columns: 1fr 1fr; }
+  .history-filters .ant-btn { width: 100%; }
+  .metric-value, .metric-card .card-input { font-size: 18px; }
+  .metric-card { padding: 8px 10px; }
+  .metric-value { overflow-wrap: anywhere; }
+}
+@media (max-width: 420px) {
+  .history-filters { grid-template-columns: 1fr; }
+}
+
+/* v1.1 controls */
+.timing-field { display: flex; flex-direction: column; gap: 6px; }
+.timing-calculated { color: #4b5563; font-size: 13px; }
+.other-costs { display: flex; flex-direction: column; gap: 8px; }
+.other-row { display: flex; gap: 8px; align-items: center; }
+.other-row .ant-input { flex: 1 1 0; min-width: 0; }
+.other-add { display: flex; align-items: center; gap: 12px; }
+.other-limit { color: #6b7280; font-size: 13px; }
+.voyage-ports { display: flex; flex-direction: column; gap: 8px; }
+.voyage-port-row { display: flex; gap: 8px; align-items: center; }
+.voyage-port-row .ant-input { min-width: 0; }
+.voyage-port-add { display: flex; align-items: center; gap: 12px; }
+.voyage-port-limit { color: #6b7280; font-size: 13px; }
+.load-notice { flex: 0 0 auto; margin-bottom: 12px; }
+.enquiry-box { margin-bottom: 12px; background: #fff; }
+.enquiry-box .ant-collapse-content-box { padding: 12px 16px; }
+.enquiry-box-footer { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 4px; }
+.enquiry-box-count { color: rgba(0, 0, 0, 0.45); font-size: 12px; }

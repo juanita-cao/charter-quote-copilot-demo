@@ -1,0 +1,1 @@
+tests/ deliberately NOT exported yet — contains real client figures in fixtures (e.g. test_e2.py 'client workbook' cases). Needs a per-file audit or fresh synthetic fixtures before inclusion. See scripts/export_public_demo_notes.md.
