@@ -129,7 +129,10 @@ def main() -> None:
     print(f"\nregistering {DEMO_COMPANY_NAME!r} / {DEMO_ADMIN_EMAIL} ...")
     reg = register_company(
         RegisterInput(
-            company_name=DEMO_COMPANY_NAME, admin_email=DEMO_ADMIN_EMAIL, password=DEMO_ADMIN_PASSWORD
+            company_name=DEMO_COMPANY_NAME,
+            admin_email=DEMO_ADMIN_EMAIL,
+            password=DEMO_ADMIN_PASSWORD,
+            password_confirm=DEMO_ADMIN_PASSWORD,
         )
     )
     if not reg.success:

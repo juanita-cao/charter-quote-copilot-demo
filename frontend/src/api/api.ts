@@ -48,6 +48,7 @@ export function createApi(client: AxiosInstance) {
   return {
     me: () => get<CurrentUserProfile>(`${P}/auth/me`),
     login: (email: string, password: string) => post<{ success: boolean }>(`${P}/auth/login`, { email, password }),
+    demoLogin: () => post<{ success: boolean }>(`${P}/auth/demo-login`),
     register: (input: RegisterInput) => post<RegisterResult>(`${P}/auth/register`, input),
     logout: () => post<{ success: boolean }>(`${P}/auth/logout`),
 

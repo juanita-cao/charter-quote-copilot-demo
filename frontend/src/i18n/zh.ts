@@ -270,6 +270,8 @@ export const zh: Catalog<typeof en> = {
     noAccount: "还没有账户？",
     register: "注册",
     sessionExpired: "登录已过期，请重新登录",
+    viewDemo: "查看演示",
+    demoNotice: "这是一个演示环境，无需注册——点击下方按钮即可用示例数据体验。",
     errors: {
       invalid: "邮箱或密码错误",
       locked: "尝试次数过多，请稍后再试",

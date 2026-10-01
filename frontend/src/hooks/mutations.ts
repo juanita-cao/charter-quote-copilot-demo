@@ -67,6 +67,15 @@ export function useLogin(api: Api) {
   });
 }
 
+// Demo deployment only: no credentials, logs straight into the seeded demo account.
+export function useDemoLogin(api: Api) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () => api.demoLogin(),
+    onSuccess: () => qc.invalidateQueries({ queryKey: QUERY_KEYS.me }),
+  });
+}
+
 // Everything the server owns is dropped on logout / session expiry; a failed logout clears nothing (A-09).
 export function useLogout(api: Api) {
   const qc = useQueryClient();

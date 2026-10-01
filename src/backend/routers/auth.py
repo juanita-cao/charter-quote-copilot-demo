@@ -28,6 +28,10 @@ from src.backend.configs.feature_flags import (
     ACCESS_COOKIE_NAME,
     ACCESS_TOKEN_TTL_MINUTES,
     DASHBOARDS_ELIGIBLE_COMPANY_IDS,
+    DEMO_LOGIN_BLOCK_MINUTES,
+    DEMO_LOGIN_EMAIL,
+    DEMO_LOGIN_MAX_PER_IP,
+    DEMO_LOGIN_WINDOW_MINUTES,
     LOGIN_EMAIL_BLOCK_MINUTES,
     LOGIN_EMAIL_MAX_FAILURES,
     LOGIN_EMAIL_WINDOW_MINUTES,
@@ -54,6 +58,13 @@ _ip_limiter = InMemoryLoginRateLimiter(
     max_failures=LOGIN_IP_MAX_FAILURES,
     window_minutes=LOGIN_IP_WINDOW_MINUTES,
     block_minutes=LOGIN_IP_BLOCK_MINUTES,
+)
+# Counts demo-login calls, not failures — same class, reused for "how many
+# times has this IP called the passwordless demo route" instead.
+_demo_login_limiter = InMemoryLoginRateLimiter(
+    max_failures=DEMO_LOGIN_MAX_PER_IP,
+    window_minutes=DEMO_LOGIN_WINDOW_MINUTES,
+    block_minutes=DEMO_LOGIN_BLOCK_MINUTES,
 )
 
 
@@ -128,6 +139,36 @@ def login(body: LoginRequest, request: Request, response: Response):
     _set_token_cookies(response, pair)
     write_audit_log_soft(
         user_id=auth_result.user_id, company_id=auth_result.company_id, action="login_success"
+    )
+    return {"success": True}
+
+
+@router.post("/demo-login")
+def demo_login(request: Request, response: Response):
+    """Passwordless entry into the fixed demo account (DEMO_LOGIN_EMAIL) for a public sales
+    demo — no credentials, no password-failure limiter (there is nothing to fail), only an
+    IP call-count cap so the route is not an unbounded way to spin up sessions. 404s outright
+    when DEMO_LOGIN_EMAIL is unset (a real deployment should leave it unset)."""
+    if DEMO_LOGIN_EMAIL is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    ip_key = f"ip:{_client_ip(request)}"
+    if _demo_login_limiter.is_blocked(ip_key):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail="Too many demo-login attempts"
+        )
+    _demo_login_limiter.record_failure(ip_key)
+
+    user_row = get_user_by_email(DEMO_LOGIN_EMAIL)
+    if user_row is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Demo account not seeded"
+        )
+
+    pair = issue_session(user_id=user_row["id"], company_id=user_row["company_id"])
+    _set_token_cookies(response, pair)
+    write_audit_log_soft(
+        user_id=user_row["id"], company_id=user_row["company_id"], action="demo_login_success"
     )
     return {"success": True}
 

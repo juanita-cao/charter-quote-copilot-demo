@@ -266,6 +266,8 @@ export const en = {
     noAccount: "No account?",
     register: "Register",
     sessionExpired: "Session expired, please log in again",
+    viewDemo: "View demo",
+    demoNotice: "This is a demo environment — no sign-up needed, click below to explore with sample data.",
     errors: {
       invalid: "Invalid email or password",
       locked: "Too many attempts, try again later",

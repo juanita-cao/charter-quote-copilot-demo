@@ -35,7 +35,7 @@ DEFAULT_ALLOWED_ORIGINS: tuple[str, ...] = ("http://localhost:5173", "http://loc
 # company's own real fleet data, gated so it is never served to another
 # tenant; widening this set is a data-exposure decision, not a routine
 # config edit. Demo build: company 1 only (the seeded demo tenant).
-VESSEL_CONSUMPTION_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({1})
+VESSEL_CONSUMPTION_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({2})
 
 # ── Custom ports eligibility ─────────────────────────────────────────────────
 # company_ids allowed to receive the custom-ports table
@@ -43,18 +43,29 @@ VESSEL_CONSUMPTION_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({1})
 # UN/LOCODE entry, specific to one company's trade. Kept separate from
 # VESSEL_CONSUMPTION_ELIGIBLE_COMPANY_IDS even when the values match —
 # widening one is not a decision to widen the other.
-CUSTOM_PORT_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({1})
+CUSTOM_PORT_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({2})
 
 # ── Distance-history eligibility ─────────────────────────────────────────────
 # company_ids allowed to receive the historical port-pair distance table
 # (`configs/route_distances.py`) — mined from one company's own real
 # voyages. Kept separate from the other two allow-lists for the same
 # reason: widening one is not a decision to widen the others.
-DISTANCE_HISTORY_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({1})
+DISTANCE_HISTORY_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({2})
 
 # ── Dashboards eligibility ───────────────────────────────────────────────────
 # company_ids allowed to see the /dashboards page and its routes at all — a
 # different reason from the three lists above (those gate one company's
 # real data from leaking to other tenants; this gates a paid feature, not a
 # data-privacy boundary). Demo build: company 1 only.
-DASHBOARDS_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({1})
+DASHBOARDS_ELIGIBLE_COMPANY_IDS: frozenset[int] = frozenset({2})
+
+# ── Demo-only passwordless entry (public demo deployment) ───────────────────
+# When set, POST /api/v1/auth/demo-login logs the caller straight into this
+# account — no credentials — so a sales demo has no login friction. None
+# (the default) disables the route entirely (404), which is what a real
+# deployment should have. Capped by DEMO_LOGIN_MAX_PER_IP so it is not an
+# unbounded way to spin up sessions.
+DEMO_LOGIN_EMAIL: str | None = "demo@meridian-bulk.example"
+DEMO_LOGIN_MAX_PER_IP: int = 30
+DEMO_LOGIN_WINDOW_MINUTES: int = 10
+DEMO_LOGIN_BLOCK_MINUTES: int = 15
