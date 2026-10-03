@@ -14,7 +14,7 @@ import { Alert, Button, Dropdown, Tooltip, message } from "antd";
 import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import logoWhite from "../assets/logo-mark-white.png";
+import logoDark from "../assets/logo-mark-dark.png";
 import { useApi, useAuth } from "../app/contexts";
 import { LanguageSwitch } from "../components/LanguageSwitch";
 import { MockBanner } from "../components/MockBanner";
@@ -43,11 +43,11 @@ function AppHeader() {
   return (
     <header className="app-header">
       <Link to="/workspace" className="app-header-brand">
-        <img src={logoWhite} alt="" height={32} />
+        <img src={logoDark} alt="" height={32} />
         <span>{t("app.name")}</span>
       </Link>
       <div className="app-header-actions">
-        <LanguageSwitch onDark />
+        <LanguageSwitch />
         <Link to="/guide" aria-label={t("header.help")} className="app-header-icon">
           <QuestionCircleOutlined />
         </Link>
@@ -55,7 +55,7 @@ function AppHeader() {
           trigger={["click"]}
           menu={{ items: [{ key: "logout", icon: <LogoutOutlined />, label: t("header.logout"), onClick: onLogout }] }}
         >
-          <Button type="text" style={{ color: "#fff" }} aria-label={t("header.account")}>
+          <Button type="text" aria-label={t("header.account")}>
             <UserOutlined /> <span className="app-account-label">{account.label}</span> <DownOutlined />
           </Button>
         </Dropdown>

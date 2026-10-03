@@ -42,17 +42,19 @@ export function LoginPage() {
 
   return (
     <div className="auth-form">
-      <img src={logoGradient} alt="" height={48} />
-      <h1>{t("app.name")}</h1>
+      <div className="auth-hero">
+        <img src={logoGradient} alt="" height={40} />
+        <h1>{t("app.name")}</h1>
+      </div>
       <p className="auth-subtitle">{t("login.title")}</p>
+      <p className="auth-tagline">{t("login.tagline")}</p>
       {state.sessionExpired && <Alert type="info" showIcon message={t("login.sessionExpired")} style={{ marginBottom: 16 }} />}
 
-      <Alert type="info" showIcon message={t("login.demoNotice")} style={{ marginBottom: 16 }} />
-      <Button block loading={demoLogin.isPending} onClick={onViewDemo}>
-        {t("login.viewDemo")}
+      <Button type="primary" block size="large" className="auth-demo-cta" loading={demoLogin.isPending} onClick={onViewDemo}>
+        {t("login.viewDemo")} →
       </Button>
       {demoError && <Alert type="error" showIcon message={demoError} style={{ marginTop: 8 }} />}
-      <Divider>{t("login.title")}</Divider>
+      <Divider plain>{t("login.orSignIn")}</Divider>
 
       <Form layout="vertical" onFinish={onFinish} disabled={login.isPending} requiredMark={false}>
         <Form.Item name="email" label={t("login.email")} rules={[{ required: true, message: t("register.required") }, { type: "email", message: t("register.invalidEmail") }]}>

@@ -267,6 +267,8 @@ export const en = {
     register: "Register",
     sessionExpired: "Session expired, please log in again",
     viewDemo: "View demo",
+    tagline: "AI-powered chartering decision support",
+    orSignIn: "or sign in with your account",
     demoNotice: "This is a demo environment — no sign-up needed, click below to explore with sample data.",
     errors: {
       invalid: "Invalid email or password",

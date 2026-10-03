@@ -271,6 +271,8 @@ export const zh: Catalog<typeof en> = {
     register: "注册",
     sessionExpired: "登录已过期，请重新登录",
     viewDemo: "查看演示",
+    tagline: "AI 驱动的航次决策支持",
+    orSignIn: "或使用账号登录",
     demoNotice: "这是一个演示环境，无需注册——点击下方按钮即可用示例数据体验。",
     errors: {
       invalid: "邮箱或密码错误",
