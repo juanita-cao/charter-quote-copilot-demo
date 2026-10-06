@@ -13,6 +13,14 @@ The company (*Meridian Bulk Chartering*), its voyages, prices and history are **
 
 ---
 
+## Screenshots
+
+<p align="center"><img src="docs/assets/login.png" width="88%" alt="Sign-in page with the demo entry"></p>
+
+<p align="center"><img src="docs/assets/dashboards.png" width="88%" alt="Dashboards: bunker price history and TCE by vessel size"></p>
+
+<p align="center"><img src="docs/assets/workspace.png" width="88%" alt="Workspace: enquiry recognition and voyage inputs"></p>
+
 ## What you can do in the demo
 
 | | |
