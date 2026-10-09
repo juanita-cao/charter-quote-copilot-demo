@@ -239,7 +239,7 @@ describe("L2-15 sidebar", () => {
 describe("language and footer", () => {
   test("the footer and the language switch work on the auth shell", async () => {
     await renderApp("/login");
-    expect(await screen.findByText("Copyright @ 2026 InnerDrive Studio All Rights Reserved")).toBeInTheDocument();
+    expect(await screen.findByText("© 2026 InnerDrive Studio. All rights reserved.")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Language" }));
     await userEvent.click(await screen.findByText("中文"));
     expect(await screen.findByText("登录您的账户")).toBeInTheDocument();

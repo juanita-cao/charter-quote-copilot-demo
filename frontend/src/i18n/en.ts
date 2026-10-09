@@ -257,7 +257,10 @@ export const en = {
     expand: "Expand sidebar",
   },
   header: { language: "Language", help: "Help", account: "Account", logout: "Logout", logoutFailed: "Logout failed. Please try again." },
-  footer: { copyright: "Copyright @ 2026 InnerDrive Studio All Rights Reserved" },
+  footer: {
+    copyright: "© 2026 InnerDrive Studio. All rights reserved.",
+    aiNotice: "AI-generated content may contain errors. Please verify important information before acting.",
+  },
   login: {
     title: "Login to your account",
     email: "Email",

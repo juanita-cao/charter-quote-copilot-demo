@@ -28,7 +28,10 @@ export function AuthLayout() {
           <Outlet />
         </div>
       </main>
-      <footer className="app-footer">{t("footer.copyright")}</footer>
+      <footer className="app-footer">
+          <div>{t("footer.aiNotice")}</div>
+          <div style={{ marginTop: 4 }}>{t("footer.copyright")}</div>
+        </footer>
     </div>
   );
 }

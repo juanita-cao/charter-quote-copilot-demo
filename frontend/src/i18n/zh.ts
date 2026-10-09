@@ -261,7 +261,10 @@ export const zh: Catalog<typeof en> = {
     expand: "展开侧边栏",
   },
   header: { language: "语言", help: "帮助", account: "账户", logout: "退出登录", logoutFailed: "退出失败，请重试。" },
-  footer: { copyright: "Copyright @ 2026 InnerDrive Studio All Rights Reserved" },
+  footer: {
+    copyright: "© 2026 InnerDrive Studio. 版权所有。",
+    aiNotice: "AI 生成内容可能有误，请在采取行动前核实重要信息。",
+  },
   login: {
     title: "登录您的账户",
     email: "邮箱",
